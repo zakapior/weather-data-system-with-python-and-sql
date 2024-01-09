@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Get database credentials for the database from .env file
+source /home/ubuntu/jakluz-DE2.2/src/.env
+
+# Set the database name and the backup file name
+DB_NAME="weather"
+BACKUP_FILE="weather_backup.sql"
+BACKUP_PLACE="/home/ubuntu/jakluz-DE2.2/backups"
+LOG_FILE="/tmp/weather_backup.log"
+date=$(date '+%Y-%m-%d_%H:%M')
+
+# Dump the database to a file
+echo "weather database backup starting on ${date}" >> $LOG_FILE
+echo "${PGPASSWORD}"
+PGPASSWORD=$DB_PASSWORD pg_dump --host=$DB_HOSTNAME -U $DB_USERNAME $DB_NAME > $BACKUP_PLACE/${BACKUP_FILE}_${date} 2>> $LOG_FILE
+
+# keep only last 24 backup files
+(cd $BACKUP_PLACE && ls -tp | grep -v '/$' | tail -n +24 | xargs -I {} rm -- {})
