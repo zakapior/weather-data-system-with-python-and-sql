@@ -1,4 +1,5 @@
-# jakluz-DE2.2
+### Portfolio project
+# Weather data system with Python and SQL
 
 This is a project for Turing College Data Engineering course Module 2 Sprint 2. It's point is to get some weather data for certain cities from an external resource, parse it and store it in the database every hour. You also need to provide some analytical functions, that would query the data from the database and provide certain informations. Lastly, we were supposed to test the impact of using conurrency on fetching data.
 
